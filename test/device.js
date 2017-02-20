@@ -1,10 +1,11 @@
 import { expect } from 'chai';
 import cpuUsageHandler from '../src/device/cpu-usage';
+import memoryHandler from '../src/device/memory';
 
 describe('device', () => {
 
   it('CPU Usage Handler', () => {
-    const data = `(Sysname) display cpu-usage
+    const data = `<Sysname> display cpu-usage
     Slot 1 CPU 0 CPU usage:
          6% in last 5 seconds
         10% in last 1 minute
@@ -22,5 +23,17 @@ describe('device', () => {
     expect(result.cpus[1].usage.last5m).eql(0.25);
   });
 
-
+  it('Memory Handler', () => {
+    const data = `<Sysname> display memory
+    The statistics about memory is measured in KB:
+    Slot 0:
+                 Total      Used      Free    Shared   Buffers    Cached   FreeRatio
+    Mem:        507980    154896    353084         0       488     54488       69.5%
+    -/+ Buffers/Cache:     99920    408060
+    Swap:           0         0         0`;
+    const result = memoryHandler.handle(data);
+    expect(result.slot).eql(0);
+    expect(result.memory.total).eql(507980);
+    expect(result.memory.free).eql(353084);
+  });
 });
