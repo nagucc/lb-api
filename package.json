@@ -35,7 +35,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
-    "debug": "^2.6.1",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
     "ssh2": "^0.5.4"
   },
   "devDependencies": {
@@ -67,6 +71,6 @@
     "build": "node tools/build",
     "prepublish": "npm run build",
     "publish:docs": "easystatic deploy docs --repo kriasoft/babel-starter-kit",
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/"
   }
 }
