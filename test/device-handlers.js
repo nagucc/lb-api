@@ -35,4 +35,39 @@ describe('device handlers', () => {
     expect(result.memory.total).eql(507980);
     expect(result.memory.free).eql(353084);
   });
+
+  it('Fan Handler', () => {
+    const data = `<TSG-LB>display fan
+Fan 0      Status: Normal  Speed:2347
+Fan 1      Status: Normal  Speed:2347
+Fan 2      Status: Normal  Speed:3269
+Fan 3      Status: Normal  Speed:3212`;
+    const result = handlers.fan.handle(data);
+    expect(result.fans.length).eql(4);
+    expect(result.fans[0].number).eql(0);
+    expect(result.fans[2].status).eql('Normal');
+    expect(result.fans[3].speed).eql(3212);
+  });
+
+  it('Power Handler', () => {
+    const data = `<TSG-LB>display power
+Power 0     Status: Normal
+Power 1     Status: Normal`;
+    const result = handlers.power.handle(data);
+    expect(result.powers.length).eql(2);
+    expect(result.powers[0].number).eql(0);
+    expect(result.powers[1].status).eql('Normal');
+  });
+
+  it('Environment Handler', () => {
+    const data = `<TSG-LB>display environment
+ System Temperature information (degree centigrade):
+-----------------------------------------------------------------------------------------
+ Sensor   Temperature LowerLimit Warning-UpperLimit  Alarm-UpperLimit Shutdown-UpperLimit
+inflow  1      28          0              60                70                NA
+outflow 1      47          0              80                92                NA`;
+    const result = handlers.environment.handle(data);
+    expect(result.inflow.temperature).eql(28);
+    expect(result.outflow.warningUpperLimit).eql(80);
+  });
 });
