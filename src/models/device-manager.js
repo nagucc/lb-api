@@ -1,6 +1,6 @@
 import { Client } from 'ssh2';
 import debug from 'debug';
-import handlers from '../handlers/device';
+import handlers from '../handlers/device/index';
 
 const info = debug('lb-api:info');
 export default class DeviceManager {

@@ -1,0 +1,31 @@
+{
+  "name": "babel-starter-kit",
+  "version": "0.0.0",
+  "description": "负载均衡设备的api",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagucc/lb-api.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nagucc/lb-api/issues"
+  },
+  "homepage": "https://github.com/nagucc/lb-api#readme",
+  "contributors": [
+    "Konstantin Tarkus <hello@tarkus.me>",
+    "Vladimir Kutepov <frenzzy.man@gmail.com>"
+  ],
+  "keywords": [],
+  "main": "dist/index.js",
+  "jsnext:main": "index.es6.js",
+  "dependencies": {
+    "babel-runtime": "^6.11.6",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "ssh2": "^0.5.4"
+  }
+}

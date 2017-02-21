@@ -12,7 +12,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { host, port, cookieKey } from './config';
-import controllers from './controllers';
+import controllers from './controllers/index';
 
 const app = express();
 

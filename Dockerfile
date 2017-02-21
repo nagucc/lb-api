@@ -1,9 +1,9 @@
-FROM nagucc/babel-starter-kit:1.2.0
+FROM node:6.9.5-alpine
 
-ADD package.json /app/
-ADD src /app/src
-WORKDIR /app
+# Copy application files
+COPY ./dist /usr/src/app
+WORKDIR /usr/src/app
+
 RUN npm install
-EXPOSE 3000
 
-CMD npm start
+CMD [ "node", "index.js" ]
