@@ -1,4 +1,5 @@
 import CommandHandler from '../command-handler';
+import { error, info } from '../../config';
 
 /*
 命令执行结果示例：
@@ -14,7 +15,7 @@ Slot 2 CPU 0 CPU usage:
        25% in last 5 minutes
  */
 const parseCpuInfo = (data) => {
-  const reg = /Slot (\d) CPU (\d).+:\n\s+(\d+)%.+5 seconds\n\s+(\d+)%.+1 minute\n\s+(\d+)%.+5 minutes/gm;
+  const reg = /Slot (\d) CPU (\d).+:\r*\n\s+(\d+)%.+5 seconds\r*\n\s+(\d+)%.+1 minute\r*\n\s+(\d+)%.+5 minutes/gm;
   const result = reg.exec(data);
   return {
     slot: parseInt(result[1], 10),
@@ -28,8 +29,10 @@ const parseCpuInfo = (data) => {
 };
 
 export default new CommandHandler('display cpu-usage', (data) => {
+  info('Text for test:', JSON.stringify(data));
   const result = {};
-  const slotTexts = data.match(/Slot \d CPU \d CPU usage:\n((.*)\n){1,2}(.*)last 5 minutes/gm);
+  const slotTexts = data.match(/Slot \d CPU \d CPU.+\r*\n(.*\r*\n){2}.*last 5 minutes/gm);
+  info('SlotTexts =', slotTexts);
   result.cpus = slotTexts.map(text => parseCpuInfo(text));
   return result;
 });

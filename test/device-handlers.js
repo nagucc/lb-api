@@ -1,8 +1,7 @@
 import { expect } from 'chai';
-import cpuUsageHandler from '../src/device/cpu-usage';
-import memoryHandler from '../src/device/memory';
+import handlers from '../src/handlers/device/index';
 
-describe('device', () => {
+describe('device handlers', () => {
 
   it('CPU Usage Handler', () => {
     const data = `<Sysname> display cpu-usage
@@ -15,7 +14,7 @@ describe('device', () => {
          15% in last 5 seconds
          8% in last 1 minute
          25% in last 5 minutes`;
-    const result = cpuUsageHandler.handle(data);
+    const result = handlers.cpuUsage.handle(data);
     expect(result.cpus.length).eql(2);
     expect(result.cpus[0].slot).eql(1);
     expect(result.cpus[1].number).eql(0);
@@ -31,7 +30,7 @@ describe('device', () => {
     Mem:        507980    154896    353084         0       488     54488       69.5%
     -/+ Buffers/Cache:     99920    408060
     Swap:           0         0         0`;
-    const result = memoryHandler.handle(data);
+    const result = handlers.memory.handle(data);
     expect(result.slot).eql(0);
     expect(result.memory.total).eql(507980);
     expect(result.memory.free).eql(353084);

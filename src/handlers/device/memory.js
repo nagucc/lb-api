@@ -1,4 +1,5 @@
 import CommandHandler from '../command-handler';
+import { info } from '../../config';
 
 /*
 命令执行结果示例：
@@ -13,7 +14,8 @@ Swap:           0         0         0
 
 // 目前仅支持单slot
 export default new CommandHandler('display memory', (data) => {
-  const reg = /Slot (\d)+:\n.+\n\s*Mem\D+(\d+)\s+(\d+)\s+(\d+)/gm;
+  info('Text for test:', JSON.stringify(data));
+  const reg = /Slot (\d+):.*\r*\n.+\r*\n\s*Mem\D+(\d+)\s+(\d+)\s+(\d+)/gm;
   const result = reg.exec(data);
   return {
     slot: parseInt(result[1], 10),
