@@ -3,32 +3,91 @@
 */
 
 import { Router } from 'express';
+import expressJwt from 'express-jwt';
 import DeviceManager from '../models/device-manager';
-import { sshOptions, info } from '../config';
+import { sshOptions, info, secret } from '../config';
+import { getToken } from '../utils';
+
 const router = new Router();
 
+const expressJwtOptions = {
+  secret,
+  credentialsRequired: true,
+  getToken,
+};
 /*
 获取当前设备CPU使用信息
  */
-router.get('/cpu-usage', async (req, res) => {
-  const manager = new DeviceManager(sshOptions);
-  const data = await manager.cpuUsage();
-  res.json({
-    ret: 0,
-    data,
-  });
-});
+router.get('/cpu-usage',
+  expressJwt(expressJwtOptions),
+  async (req, res) => {
+    const manager = new DeviceManager(sshOptions);
+    const data = await manager.cpuUsage();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
 
 /*
 获取当前设备内存使用信息
  */
-router.get('/memory', async (req, res) => {
-  const manager = new DeviceManager(sshOptions);
-  const data = await manager.memory();
-  res.json({
-    ret: 0,
-    data,
-  });
-});
+router.get('/memory',
+  expressJwt(expressJwtOptions),
+  async (req, res) => {
+    const manager = new DeviceManager(sshOptions);
+    const data = await manager.memory();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
+
+/*
+获取当前设备风扇状态
+ */
+router.get('/fan',
+  expressJwt(expressJwtOptions),
+  async (req, res) => {
+    const manager = new DeviceManager(sshOptions);
+    const data = await manager.fan();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
+
+/*
+获取当前设备电源信息
+ */
+router.get('/power',
+  expressJwt(expressJwtOptions),
+  async (req, res) => {
+    const manager = new DeviceManager(sshOptions);
+    const data = await manager.power();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
+
+/*
+获取当前设备环境信息
+ */
+router.get('/environment',
+  expressJwt(expressJwtOptions),
+  async (req, res) => {
+    const manager = new DeviceManager(sshOptions);
+    const data = await manager.environment();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
 
 export default router;

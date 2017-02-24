@@ -4,5 +4,14 @@
 
 ## CHANGELOG
 
+### v1.1
+- 增加基于jwt的token验证
+- 增加API
+  - /device/fan
+  - /device/power
+  - /device/environment
+
 ### v1.0
-- 完成device两个API：/device/cpu-usage, /device/memory
+- 完成device两个API
+  - /device/cpu-usage
+  - /device/memory
