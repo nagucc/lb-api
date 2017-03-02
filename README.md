@@ -10,6 +10,9 @@
   - /device/fan
   - /device/power
   - /device/environment
+  - /interface
+  - /interface/counters/inbound
+  - /interface/counters/outbound
 
 ### v1.0
 - 完成device两个API

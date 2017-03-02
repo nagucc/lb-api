@@ -31,6 +31,7 @@ app.use(morgan('dev'));
 注册API
 */
 app.use('/device', controllers.device);
+app.use('/interface', controllers.ni);
 
 app.listen(port, () => {
   console.log(`The server is running at http://${host}/`);

@@ -19,7 +19,7 @@ GE1/0/6                         0                   0                   0       
 
 const parseGe = (ge) => {
   info('parseGe text:', JSON.stringify(ge));
-  const result = /(GE\d+\/\d+\/\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/gm.exec(ge);
+  const result = /(X?GE\d+\/\d+\/\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/gm.exec(ge);
   return {
     name: result[1],
     total: parseInt(result[2], 10),
@@ -32,14 +32,16 @@ const parseGe = (ge) => {
 const handleData = (data) => {
   info('display counters inbound/outbound result:', JSON.stringify(data));
   const geResult = data.match(/GE\d+\/\d+\/\d+.+/gm);
+  const xgeResult = data.match(/XGE\d+\/\d+\/\d+.+/gm);
   return {
     ge: geResult.map(text => parseGe(text)),
+    xge: xgeResult.map(text => parseGe(text)),
   };
 };
 
-const inbound = new CommandHandler('display counters inbound', handleData);
+const inbound = new CommandHandler('display counters inbound interface', handleData);
 
-const outbound = new CommandHandler('display counters inbound', handleData);
+const outbound = new CommandHandler('display counters outbound interface', handleData);
 
 export default {
   inbound,

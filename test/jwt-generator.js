@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 describe('jwt', () => {
 
   it('token generator', async () => {
-    const secret = 'secret';
+    const secret = 'my secret';
     const token = jwt.sign({
-      userId: 'na57',
+      userId: 'test',
     }, secret);
     console.log(token);
   });
