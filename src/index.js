@@ -33,6 +33,11 @@ app.use(morgan('dev'));
 app.use('/device', controllers.device);
 app.use('/interface', controllers.ni);
 
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('invalid token');
+  }
+});
 app.listen(port, () => {
   console.log(`The server is running at http://${host}/`);
 });
