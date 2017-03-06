@@ -32,10 +32,14 @@ app.use(morgan('dev'));
 */
 app.use('/device', controllers.device);
 app.use('/interface', controllers.ni);
+app.use('/server-lb', controllers.serverLb);
 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
-    res.status(401).send('invalid token');
+    res.json({
+      ret: 401,
+      msg: err.message,
+    });
   }
 });
 app.listen(port, () => {
