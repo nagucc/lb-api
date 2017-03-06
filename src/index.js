@@ -31,7 +31,17 @@ app.use(morgan('dev'));
 注册API
 */
 app.use('/device', controllers.device);
+app.use('/interface', controllers.ni);
+app.use('/server-lb', controllers.serverLb);
 
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.json({
+      ret: 401,
+      msg: err.message,
+    });
+  }
+});
 app.listen(port, () => {
   console.log(`The server is running at http://${host}/`);
 });
