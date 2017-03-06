@@ -7,6 +7,10 @@
 ### v1.2
 
 - 处理未认证时抛出的异常
+- 增加API
+  - /server-lb/real-server
+  - /server-lb/server-farm
+  - /server-lb/virtual-server
 
 ### v1.1
 - 增加基于jwt的token验证
