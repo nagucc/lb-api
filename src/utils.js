@@ -1,5 +1,5 @@
 import amqp from 'amqplib';
-import { amqpUrl, requestQueueName } from './config';
+import { amqpUrl, requestQueueName, error } from './config';
 
 /*
 从request中获取jwt
@@ -19,9 +19,14 @@ export const sendRequestToQueue = getMessage => async (req, res, next) => {
     datetime: Date.now(),
   }));
   const message = getMessage(req, res);
-  const connection = await amqp.connect(amqpUrl);
-  const channel = await connection.createChannel();
-  channel.assertQueue(requestQueueName);
-  channel.sendToQueue(requestQueueName, new Buffer(JSON.stringify(message)));
-  next();
+  try {
+    const connection = await amqp.connect(amqpUrl);
+    const channel = await connection.createChannel();
+    channel.assertQueue(requestQueueName);
+    channel.sendToQueue(requestQueueName, new Buffer(JSON.stringify(message)));
+  } catch (e) {
+    error(e.message);
+  } finally {
+    next();
+  }
 };
