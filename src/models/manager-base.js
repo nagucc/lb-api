@@ -21,7 +21,8 @@ export default class ManagerBase {
             return;
           }
           stream.on('close', () => {
-            conn.end();
+            // conn.end();
+            // info('Client :: end');
           }).on('data', (data) => {
             str += data;
           }).stderr.on('data', (data) => {
@@ -29,6 +30,8 @@ export default class ManagerBase {
           }).on('end', () => {
             const result = commandHandler.handle(str);
             resolve(result);
+            conn.end();
+            info('Client :: end');
           });
           stream.write('screen-length disable\n');
           stream.write(`${commandHandler.command}\n`);
