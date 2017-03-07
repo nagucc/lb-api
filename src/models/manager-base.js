@@ -1,5 +1,5 @@
 import { Client } from 'ssh2';
-import { info } from '../config';
+import { info, error } from '../config';
 
 export default class ManagerBase {
   constructor(sshOptions) {
@@ -37,6 +37,8 @@ export default class ManagerBase {
           stream.write(`${commandHandler.command}\n`);
           stream.end('exit\n');
         });
+      }).on('error', (err) => {
+        error('Client Error:', err);
       }).connect(this.sshOptions);
     });
   }
