@@ -17,6 +17,7 @@ export default class ManagerBase {
         let str = '';
         conn.shell((err, stream) => {
           if (err) {
+            error('Shell Error:', err);
             reject(err);
             return;
           }
