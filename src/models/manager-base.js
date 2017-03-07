@@ -15,7 +15,7 @@ export default class ManagerBase {
       conn.on('ready', () => {
         info('Client :: ready');
         let str = '';
-        conn.shell({}, {}, (err, stream) => {
+        conn.shell(false, (err, stream) => {
           if (err) {
             reject(err);
             return;
