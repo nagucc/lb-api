@@ -6,7 +6,7 @@ import { Router } from 'express';
 import expressJwt from 'express-jwt';
 import ServerLbManager from '../models/server-lb-manager';
 import { sshOptions, info, secret } from '../config';
-import { getToken } from '../utils';
+import { getToken, sendRequestToQueue } from '../utils';
 
 const router = new Router();
 
@@ -16,8 +16,10 @@ const expressJwtOptions = {
   getToken,
 };
 
+
 router.get('/virtual-server',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new ServerLbManager(sshOptions);
     const data = await manager.virtualServers();
@@ -30,6 +32,7 @@ router.get('/virtual-server',
 
 router.get('/server-farm',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new ServerLbManager(sshOptions);
     const data = await manager.serverFarms();
@@ -42,6 +45,7 @@ router.get('/server-farm',
 
 router.get('/real-server',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new ServerLbManager(sshOptions);
     const data = await manager.realServers();

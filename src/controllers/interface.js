@@ -6,7 +6,7 @@ import { Router } from 'express';
 import expressJwt from 'express-jwt';
 import InterfaceManager from '../models/interface-manager';
 import { sshOptions, info, secret } from '../config';
-import { getToken } from '../utils';
+import { getToken, sendRequestToQueue } from '../utils';
 
 const router = new Router();
 
@@ -18,6 +18,7 @@ const expressJwtOptions = {
 
 router.get('/',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new InterfaceManager(sshOptions);
     const data = await manager.brief();
@@ -30,6 +31,7 @@ router.get('/',
 
 router.get('/counters/inbound',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async(req, res) => {
     const manager = new InterfaceManager(sshOptions);
     const data = await manager.inboundCounters();
@@ -42,6 +44,7 @@ router.get('/counters/inbound',
 
 router.get('/counters/outbound',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async(req, res) => {
     const manager = new InterfaceManager(sshOptions);
     const data = await manager.outboundCounters();

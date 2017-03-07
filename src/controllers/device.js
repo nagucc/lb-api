@@ -6,7 +6,7 @@ import { Router } from 'express';
 import expressJwt from 'express-jwt';
 import DeviceManager from '../models/device-manager';
 import { sshOptions, info, secret } from '../config';
-import { getToken } from '../utils';
+import { getToken, sendRequestToQueue } from '../utils';
 
 const router = new Router();
 
@@ -20,6 +20,7 @@ const expressJwtOptions = {
  */
 router.get('/cpu-usage',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new DeviceManager(sshOptions);
     const data = await manager.cpuUsage();
@@ -35,6 +36,7 @@ router.get('/cpu-usage',
  */
 router.get('/memory',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new DeviceManager(sshOptions);
     const data = await manager.memory();
@@ -50,6 +52,7 @@ router.get('/memory',
  */
 router.get('/fan',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new DeviceManager(sshOptions);
     const data = await manager.fan();
@@ -65,6 +68,7 @@ router.get('/fan',
  */
 router.get('/power',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new DeviceManager(sshOptions);
     const data = await manager.power();
@@ -80,6 +84,7 @@ router.get('/power',
  */
 router.get('/environment',
   expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
   async (req, res) => {
     const manager = new DeviceManager(sshOptions);
     const data = await manager.environment();
