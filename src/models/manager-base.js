@@ -16,7 +16,10 @@ export default class ManagerBase {
         info('Client :: ready');
         let str = '';
         conn.shell((err, stream) => {
-          if (err) reject(err);
+          if (err) {
+            reject(err);
+            return;
+          }
           stream.on('close', () => {
             conn.end();
           }).on('data', (data) => {
