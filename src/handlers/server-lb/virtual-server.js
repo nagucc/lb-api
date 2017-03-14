@@ -102,7 +102,7 @@ const handleAll = (data) => {
         v6: getLineValue('Virtual IPv6 address'),
       },
       port: getLineValue('Port'),
-      primaryServerFarm: getLineValue('Primary server farm'),
+      primaryServerFarm: getLineValue('Primary server farm').split(' (in use)')[0],
       lbPolicy: getLineValue('LB policy'),
     };
   });
