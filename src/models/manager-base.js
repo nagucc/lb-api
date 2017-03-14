@@ -1,4 +1,6 @@
 import { Client } from 'ssh2';
+import iconv from 'iconv-lite';
+
 import { info, error } from '../config';
 
 export default class ManagerBase {
@@ -25,7 +27,7 @@ export default class ManagerBase {
             // conn.end();
             // info('Client :: end');
           }).on('data', (data) => {
-            str += data;
+            str += iconv.decode(data, 'GBK');
           }).stderr.on('data', (data) => {
             reject(data);
           }).on('end', () => {

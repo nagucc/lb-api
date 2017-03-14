@@ -202,7 +202,6 @@ Virtual server: 208.3-ssh�˿�����
   Connection synchronization: Disabled
   Sticky synchronization: Disabled`;
       const result = handlers.virtualServer.all().handle(data);
-      console.log(result);
     });
   });
 });
