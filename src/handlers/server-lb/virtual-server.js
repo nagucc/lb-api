@@ -103,7 +103,7 @@ const handleAll = (data) => {
       },
       port: getLineValue('Port'),
       primaryServerFarm: getLineValue('Primary server farm'),
-      lbPolicy: getLineValue('LB Policy'),
+      lbPolicy: getLineValue('LB policy'),
     };
   });
 };
