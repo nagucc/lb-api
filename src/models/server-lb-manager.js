@@ -14,4 +14,7 @@ export default class ServerLbManager extends ManagerBase {
   realServerBrief() {
     return super.run(handlers.realServer.brief());
   }
+  lbPolicy() {
+    return super.run(handlers.lbPolicy());
+  }
 }

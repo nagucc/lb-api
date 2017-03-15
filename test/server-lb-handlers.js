@@ -204,4 +204,38 @@ Virtual server: 208.3-ssh�˿�����
       const result = handlers.virtualServer.all().handle(data);
     });
   });
+  describe('loadbalance', () => {
+    it('policy', async () => {
+      const data = `<TSG-LB>display loadbalance policy
+      LB policy: https-reverse-proxy
+        Description:
+        Type: HTTP
+        Class: docker-production-https
+         Action: to-docker-production-http-group
+        Class: web-group
+         Action: 到站群web
+        Class: jinzhi-public
+         Action: 到jinzhi-nginx集群
+        Class: elearning-zlgc
+         Action: 到elearning-zlgc服务器组
+        Class: ecard.ynu.edu.cn==host
+         Action: 到ecard.ynu.edu.cn
+        Class: oa
+         Action: to-oa-group
+        Class: docker-development
+         Action: to-docker-development-http-group
+        Default class action: default-action
+
+      LB policy: https-reverse-proxy-transition
+        Description:
+        Type: HTTP
+        Class: docker-production-https-transition
+         Action: to-docker-production-http-group
+        Class: any-ynu.edu.cn-site
+         Action: redirect-to-https
+        Default class action:`;
+      const result = handlers.lbPolicy().handle(data);
+      console.log(result);
+    });
+  });
 });

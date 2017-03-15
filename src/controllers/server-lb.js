@@ -56,4 +56,16 @@ router.get('/real-server',
   }
 );
 
+router.get('/lb-policy',
+  expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
+  async (req, res) => {
+    const manager = new ServerLbManager(sshOptions);
+    const data = await manager.lbPolicy();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
 export default router;

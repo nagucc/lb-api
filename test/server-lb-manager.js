@@ -18,4 +18,8 @@ describe('server lb manager', () => {
     const result = await manager.realServers();
     expect(result.length).above(0);
   });
+  it('lbPolicy()', async () => {
+    const result = await manager.lbPolicy();
+    expect(result.length).above(0);
+  });
 });

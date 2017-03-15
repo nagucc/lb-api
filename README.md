@@ -6,7 +6,8 @@
 
 ### v1.3
 - 将request日志记录到MQ中
-
+- 增加API
+  - /server-lb/lb-policy
 ### v1.2
 
 - 处理未认证时抛出的异常
