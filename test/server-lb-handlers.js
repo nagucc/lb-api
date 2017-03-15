@@ -235,6 +235,36 @@ Virtual server: 208.3-ssh�˿�����
          Action: redirect-to-https
         Default class action:`;
       const result = handlers.lbPolicy().handle(data);
+    });
+    it('class', () => {
+      const data = `<TSG-LB>display loadbalance class
+      LB class: 65031141.ynu.edu.cn==host
+        Description:
+        Type: HTTP
+        Match type: Match-all
+        Match rule:
+          match 1 header host value 65031141.ynu.edu.cn
+
+      LB class: any-ynu.edu.cn-site
+        Description:
+        Type: HTTP
+        Match type: Match-any
+        Match rule:
+          match 1 header host value .+\\.ynu\\.edu\\.cn
+
+      LB class: docker-production-https
+        Description:
+        Type: HTTP
+        Match type: Match-any
+        Match rule:
+          match 1 header host value ^api\\.ynu
+          match 2 header host value ^kong-dashboard\\.ynu
+          match 3 header host value ^ecard-wxe\\.ynu
+          match 4 header host value ^jxcg\\.ynu
+          match 5 header host value ^op-itc\\.ynu
+          match 6 header host value ^go\\.ynu
+          match 7 header host value ^mq\\.ynu`;
+      const result = handlers.lbClass().handle(data);
       console.log(result);
     });
   });

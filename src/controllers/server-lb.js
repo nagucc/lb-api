@@ -68,4 +68,17 @@ router.get('/lb-policy',
     });
   }
 );
+
+router.get('/lb-class',
+  expressJwt(expressJwtOptions),
+  sendRequestToQueue(),
+  async (req, res) => {
+    const manager = new ServerLbManager(sshOptions);
+    const data = await manager.lbClass();
+    res.json({
+      ret: 0,
+      data,
+    });
+  }
+);
 export default router;

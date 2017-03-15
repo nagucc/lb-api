@@ -22,4 +22,8 @@ describe('server lb manager', () => {
     const result = await manager.lbPolicy();
     expect(result.length).above(0);
   });
+  it('lbClass()', async() => {
+    const result = await manager.lbClass();
+    console.log(result);
+  });
 });
