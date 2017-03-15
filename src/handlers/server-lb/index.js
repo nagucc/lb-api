@@ -3,6 +3,7 @@ import serverFarm from './server-farm';
 import virtualServer from './virtual-server';
 import lbPolicy from './lb-policy';
 import lbClass from './lb-class';
+import lbAction from './lb-action';
 
 export default {
   realServer,
@@ -10,4 +11,5 @@ export default {
   virtualServer,
   lbPolicy,
   lbClass,
+  lbAction,
 };

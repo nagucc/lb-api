@@ -8,6 +8,8 @@
 - 将request日志记录到MQ中
 - 增加API
   - /server-lb/lb-policy
+  - /server-lb/lb-class
+  - /server-lb/lb-action
 ### v1.2
 
 - 处理未认证时抛出的异常

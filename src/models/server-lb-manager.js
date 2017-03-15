@@ -20,4 +20,7 @@ export default class ServerLbManager extends ManagerBase {
   lbClass() {
     return super.run(handlers.lbClass());
   }
+  lbAction() {
+    return super.run(handlers.lbAction());
+  }
 }

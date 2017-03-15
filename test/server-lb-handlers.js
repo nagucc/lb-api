@@ -265,6 +265,31 @@ Virtual server: 208.3-ssh�˿�����
           match 6 header host value ^go\\.ynu
           match 7 header host value ^mq\\.ynu`;
       const result = handlers.lbClass().handle(data);
+    });
+    it('action', () => {
+      const data = `<TSG-LB>display loadbalance action
+LB action: redirect-to-https
+  Description:
+  Type: Generic
+  State: Active
+  Forward type: Server farm
+  Server farm: redirect-to-https (in use)
+  Backup server farm:
+  Sticky:
+  IP ToS:
+  Fallback-action: Disabled
+
+LB action: to-docker-development-http-group
+  Description:
+  Type: Generic
+  State: Active
+  Forward type: Server farm
+  Server farm: docker-development-http-group (in use)
+  Backup server farm:
+  Sticky:
+  IP ToS:
+  Fallback-action: Disabled`;
+      const result = handlers.lbAction().handle(data);
       console.log(result);
     });
   });
