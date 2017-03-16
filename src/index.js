@@ -37,6 +37,11 @@ app.use((err, req, res, next) => {
       ret: 401,
       msg: err.message,
     });
+  } else {
+    res.json({
+      ret: 500,
+      msg: err.message,
+    });
   }
 });
 app.listen(port, () => {
